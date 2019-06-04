@@ -147,7 +147,7 @@ class MyCanvas extends Canvas {
 
 				// decrease magnitude as time goes by
 				for (int i = 0; i < heights.length; i++) {
-					if (heights[i] != 0) {
+					if (heights[i] > 5) {
 						heights[i] -= 20;
 					}
 				}
