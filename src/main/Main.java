@@ -56,7 +56,7 @@ class MyCanvas extends Canvas {
 	final int RADIUS = 20;
 	int height = 10;
 	int dy = 10;
-	final int MAX = 500;
+	final int MAX = 1000;
 
 	// frequency heights
 	int[] heights = new int[8];
@@ -140,31 +140,42 @@ class MyCanvas extends Canvas {
 
 				// sort magnitudes
 
-				for (double magnitude : magnitudes) {
-					System.out.println(magnitude);
-					if (magnitude >= 0 && magnitude <= 1) {
-						heights[0] += 5;
-					} else if (magnitude > 1 && magnitude <= 2) {
-						heights[1] += 5;
-					} else if (magnitude > 2 && magnitude <= 3) {
-						heights[2] += 5;
-					} else if (magnitude > 4 && magnitude <= 6) {
-						heights[3] += 2;
-					} else if (magnitude > 6 && magnitude <= 8) {
-						heights[4] += 2;
-					} else if (magnitude > 8 && magnitude <= 12) {
-						heights[5] += 2;
-					} else if (magnitude > 12 && magnitude <= 20) {
-						heights[6] += 2;
-					} else if (magnitude > 20) {
-						heights[7] += 2;
+				System.out.println();
+
+				for (int i = 0; i < magnitudes.length; i++) {
+					System.out.println(magnitudes[i]);
+					if (i <= 1) {
+						heights[0] += 10 * magnitudes[i];
+					} else if (i > 1 && i <= 2) {
+						heights[1] += 10 * magnitudes[i];
+					} else if (i > 2 && i <= 4) {
+						heights[2] += 10 * magnitudes[i];
+					} else if (i > 4 && i <= 8) {
+						heights[3] += 10 * magnitudes[i];
+					} else if (i > 8 && i <= 16) {
+						heights[4] += 10 * magnitudes[i];
+					} else if (i > 16 && i <= 32) {
+						heights[5] += 10 * magnitudes[i];
+					} else if (i > 32 && i <= 64) {
+						heights[6] += 10 * magnitudes[i];
+					} else if (i > 64) {
+						heights[7] += 10 * magnitudes[i];
 					}
 				}
+
+				heights[0] = heights[0];
+				heights[1] = heights[1];
+				heights[2] = heights[2] / 4;
+				heights[3] = heights[3] / 8;
+				heights[4] = heights[4] / 16;
+				heights[5] = heights[5] / 32;
+				heights[6] = heights[6] / 64;
+				heights[7] = heights[7] / 100;
 
 				repaint();
 
 				try {
-					Thread.sleep(10);
+					Thread.sleep(23);
 				} catch (InterruptedException evt) {
 				}
 
@@ -188,30 +199,27 @@ class MyCanvas extends Canvas {
 
 	public void paint(Graphics g) {
 
-		for (double i : heights) {
-			// System.out.println(i);
-		}
-
-		g.drawRect(10, 50, 20, heights[0]);
-		g.drawRect(30, 50, 20, heights[1]);
-		g.drawRect(50, 50, 20, heights[2]);
-		g.drawRect(70, 50, 20, heights[3]);
-		g.drawRect(90, 50, 20, heights[4]);
-		g.drawRect(110, 50, 20, heights[5]);
-		g.drawRect(130, 50, 20, heights[6]);
-		g.drawRect(150, 50, 20, heights[7]);
+		g.setColor(Color.RED);
+		g.fill3DRect(10, (475 - heights[0]), 40, heights[0], true);
+		g.setColor(Color.ORANGE);
+		g.fill3DRect(50, (475 - heights[1]), 40, heights[1], true);
+		g.setColor(Color.YELLOW);
+		g.fill3DRect(90, (475 - heights[2]), 40, heights[2], true);
+		g.setColor(Color.GREEN);
+		g.fill3DRect(130, (475 - heights[3]), 40, heights[3], true);
+		g.setColor(Color.CYAN);
+		g.fill3DRect(170, (475 - heights[4]), 40, heights[4], true);
+		g.setColor(Color.BLUE);
+		g.fill3DRect(210, (475 - heights[5]), 40, heights[5], true);
+		g.setColor(Color.MAGENTA);
+		g.fill3DRect(250, (475 - heights[6]), 40, heights[6], true);
+		g.setColor(Color.PINK);
+		g.fill3DRect(290, (475 - heights[7]), 40, heights[7], true);
 
 	}
 
 	public void update(Graphics g) {
-		g.clearRect(10, 50, 21, MAX);
-		g.clearRect(30, 50, 21, MAX);
-		g.clearRect(50, 50, 21, MAX);
-		g.clearRect(70, 50, 21, MAX);
-		g.clearRect(90, 50, 21, MAX);
-		g.clearRect(110, 50, 21, MAX);
-		g.clearRect(130, 50, 21, MAX);
-		g.clearRect(150, 50, 21, MAX);
+		g.clearRect(0, 0, 350, MAX);
 
 		// change
 		/*
